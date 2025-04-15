@@ -77,7 +77,7 @@ class SimpleDrivingEnv(gym.Env):
                                   (carpos[1] - goalpos[1]) ** 2))
         # reward = max(self.prev_dist_to_goal - dist_to_goal, 0)
         # reward = -dist_to_goal
-        reward = self.prev_dist_to_goal - dist_to_goal
+        reward = 10 * (self.prev_dist_to_goal - dist_to_goal)
         self.prev_dist_to_goal = dist_to_goal
 
         # Done by reaching goal
