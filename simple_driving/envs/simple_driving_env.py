@@ -76,16 +76,15 @@ class SimpleDrivingEnv(gym.Env):
         dist_to_goal = math.sqrt(((carpos[0] - goalpos[0]) ** 2 +
                                   (carpos[1] - goalpos[1]) ** 2))
         # reward = max(self.prev_dist_to_goal - dist_to_goal, 0)
-        # reward = -dist_to_goal
-        reward = 10 * (self.prev_dist_to_goal - dist_to_goal)
+        reward = -dist_to_goal
         self.prev_dist_to_goal = dist_to_goal
 
         # Done by reaching goal
         if dist_to_goal < 1.5 and not self.reached_goal:
             #print("reached goal")
-            reward += 50 #bonus reward for success
             self.done = True
             self.reached_goal = True
+            reward = 50-(dist_to_goal) #bonus reward for success
 
         ob = car_ob
         return ob, reward, self.done, dict()
